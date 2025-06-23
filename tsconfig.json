@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -18,10 +19,19 @@
         "name": "next"
       }
     ],
+    "baseUrl": "src",
     "paths": {
-      "src/*": ["./src/*"]
-    }
+      "ui/*": ["components/ui/*"],
+      "src/*": ["./*"]
+    },
+    "target": "ES2017"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+    // "__tests__/snapshot.js"
+  ],
   "exclude": ["node_modules"]
 }
