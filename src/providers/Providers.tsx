@@ -1,4 +1,5 @@
 'use client'
+import { ThemeProvider } from 'next-theme'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -13,22 +14,28 @@ export default function Providers({ children }: TWithChildren) {
 		defaultOptions: {
 			queries: {
 				refetchOnWindowFocus: false,
-				retry: 1,
+				retry: 1
 			},
 			mutations: {
-				retry: 1,
-			},
-		},
+				retry: 1
+			}
+		}
 	})
 
 	return (
-		<QueryClientProvider client={client}>
-			<LazyMotion features={domAnimation}>
-				{children}
-				<Toaster />
-			</LazyMotion>
+		<ThemeProvider
+			defaultTheme='system'
+			attribute='class'
+			mediaQuery
+		>
+			<QueryClientProvider client={client}>
+				<LazyMotion features={domAnimation}>
+					{children}
+					<Toaster />
+				</LazyMotion>
 
-			{IS_DEV && <ReactQueryDevtools initialIsOpen={false} />}
-		</QueryClientProvider>
+				{IS_DEV && <ReactQueryDevtools initialIsOpen={false} />}
+			</QueryClientProvider>
+		</ThemeProvider>
 	)
 }

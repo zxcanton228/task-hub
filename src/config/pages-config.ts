@@ -2,7 +2,7 @@ export class PagesConfig {
 	public readonly REGISTER = '/register'
 	public readonly LOGIN = '/login'
 
-	public readonly DASHBOARD = '/'
+	public readonly DASHBOARD = '/dashboard'
 	public readonly MESSAGES = '/messages'
 	public readonly SETTINGS = '/settings'
 	public readonly SCHEDULE = '/schedule'

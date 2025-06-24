@@ -55,3 +55,21 @@ export const MAIN_LINKS: TLink[] = [
 		icon: Settings
 	}
 ]
+export const PROJECTS = [
+	{
+		name: 'Project 1',
+		icon: 'purple'
+	},
+	{
+		name: 'Project 2',
+		icon: 'pink'
+	},
+	{
+		name: 'Project 3',
+		icon: 'yellow'
+	},
+	{
+		name: 'Project 4',
+		icon: 'orange'
+	}
+]
