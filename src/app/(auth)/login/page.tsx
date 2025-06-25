@@ -1,17 +1,18 @@
 import type { Metadata } from 'next'
-import { Header } from 'src/components/layout/header/Header'
 
 import { SEO } from 'src/constants/seo.constants'
 
 export const metadata: Metadata = {
-	title: 'Dashboard',
+	title: '',
 	...SEO.NO_INDEX_PAGE
 }
 
-export default function DashboardPage() {
+export default function Page() {
 	return (
 		<div>
-			<Header title='Dashboard' />
+			<form action=''>
+				<h1 className='text-4xl'>Login</h1>
+			</form>
 		</div>
 	)
 }

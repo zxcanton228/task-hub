@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-import { Sidebar } from 'src/components/layout/sidebar/Sidebar'
 import { SEO } from 'src/constants/seo.constants'
 import Providers from 'src/providers/Providers'
 import type { TWithChildren } from 'src/types/types'
@@ -31,12 +30,7 @@ export default function RootLayout({ children }: TWithChildren) {
 			suppressHydrationWarning
 		>
 			<body className={`${poppins.variable} antialiased scroll-smooth`}>
-				<Providers>
-					<Sidebar />
-					<div className='wrapper'>
-						<main>{children}</main>
-					</div>
-				</Providers>
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	)
