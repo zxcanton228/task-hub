@@ -4,9 +4,11 @@ import { useOutside } from 'src/hooks/useOutside'
 import type { ITimeRange } from 'src/types/chart.types'
 import { Heading } from 'ui/Heading'
 import { TIME_RANGES_DATA } from '../data/dashboard.data'
+
 type Props = {
 	state: [ITimeRange, Dispatch<SetStateAction<ITimeRange>>]
 }
+
 export const ChartHeader: FC<Props> = ({ state: [selectedRange, setSelectedRange] }) => {
 	const { isShow, ref, setIsShow } = useOutside(false)
 	const handleChange = (range: ITimeRange) => {

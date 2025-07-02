@@ -4,9 +4,9 @@ export type TTask = {
 	title: string
 	status: number
 	messages: number
-	date: string
+	dueDate: number
 	images: number
 	links: number
-	color: string[]
+	color: string
 	icon?: LucideIcon
 }

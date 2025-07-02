@@ -81,20 +81,18 @@ export const TIME_RANGES_DATA: ITimeRange[] = [
 	}
 ]
 
-/*
-repeating-linear-gradient(
-    -45deg,
-    red,
-    red 5px,
-    blue 5px,
-    blue 10px
-  );
-*/
+const getDay = (days: number) => {
+	const dateNow = Date.now()
+	const day = days * 24 * 60 * 60 * 1000
+
+	return new Date(dateNow + day)
+}
+
 export const LASTS_TASKS: TTask[] = [
 	{
-		date: 'Due : 5days',
+		dueDate: 5,
 		title: 'Travel up',
-		color: ['#6f5de7', '#836df6'],
+		color: '#6f5de7',
 		status: 52,
 		messages: 3,
 		images: 6,
@@ -102,9 +100,9 @@ export const LASTS_TASKS: TTask[] = [
 		icon: Plane
 	},
 	{
-		date: 'Due : 1days',
+		dueDate: 3,
 		title: 'Travel up',
-		color: ['#19c4ac', '#2ac6b4'],
+		color: '#19c4ac',
 		status: 100,
 		messages: 17,
 		images: 8,
@@ -112,9 +110,9 @@ export const LASTS_TASKS: TTask[] = [
 		icon: Plane
 	},
 	{
-		date: 'Due :3days',
+		dueDate: 1,
 		title: 'Travel up',
-		color: ['#f7c121', '#fec430'],
+		color: '#f7c121',
 		messages: 1,
 		status: 78,
 		images: 3,
