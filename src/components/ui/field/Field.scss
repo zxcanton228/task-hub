@@ -1,0 +1,16 @@
+.field {
+	label {
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+
+		input {
+			padding: 10px 15px;
+			outline: none !important;
+			transition: border 0.3s ease-in-out;
+			&:focus {
+				border: 1px solid var(--primary);
+			}
+		}
+	}
+}

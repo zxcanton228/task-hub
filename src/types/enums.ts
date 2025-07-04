@@ -7,6 +7,7 @@ export type EnumLastTasksFilters = (typeof EnumLastTasksFilters)[keyof typeof En
 
 export const EnumDeadlineSort = {
 	UPPER: 0,
-	LOWER: 1
+	LOWER: 1,
+	NONE: 2
 } as const
 export type EnumDeadlineSort = (typeof EnumDeadlineSort)[keyof typeof EnumDeadlineSort]

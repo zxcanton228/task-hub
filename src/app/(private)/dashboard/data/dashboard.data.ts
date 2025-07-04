@@ -1,6 +1,6 @@
 import { Plane } from 'lucide-react'
 import type { IChartDataPoint, ITimeRange } from 'src/types/chart.types'
-import type { TTask } from 'src/types/dashboard.types'
+import type { ITask } from 'src/types/dashboard.types'
 
 export const STATS_DATA = [
 	{
@@ -81,16 +81,17 @@ export const TIME_RANGES_DATA: ITimeRange[] = [
 	}
 ]
 
-const getDay = (days: number) => {
-	const dateNow = Date.now()
-	const day = days * 24 * 60 * 60 * 1000
-
-	return new Date(dateNow + day)
+const getDate = (day: number) => {
+	const date = Date.now()
+	const dayInMs = day * 24 * 60 * 60
+	const fiveDaysAgo = date + dayInMs
+	return new Date(fiveDaysAgo)
 }
 
-export const LASTS_TASKS: TTask[] = [
+export const LASTS_TASKS: ITask[] = [
 	{
-		dueDate: 5,
+		id: 1,
+		dueDate: getDate(5),
 		title: 'Travel up',
 		color: '#6f5de7',
 		status: 52,
@@ -100,7 +101,8 @@ export const LASTS_TASKS: TTask[] = [
 		icon: Plane
 	},
 	{
-		dueDate: 3,
+		id: 2,
+		dueDate: getDate(3),
 		title: 'Travel up',
 		color: '#19c4ac',
 		status: 100,
@@ -110,7 +112,8 @@ export const LASTS_TASKS: TTask[] = [
 		icon: Plane
 	},
 	{
-		dueDate: 1,
+		id: 3,
+		dueDate: getDate(2),
 		title: 'Travel up',
 		color: '#f7c121',
 		messages: 1,

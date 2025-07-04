@@ -2,20 +2,21 @@
 import cn from 'clsx'
 import * as m from 'framer-motion/m'
 import { useRef, type FC } from 'react'
-import type { TTabsStore } from 'src/store/store.types'
+import type { ITabsStore } from 'src/store/store.types'
 import type { EnumLastTasksFilters } from 'src/types/enums'
 
 type Props = {
-	switchTab: TTabsStore['setTab']
+	switchTab: ITabsStore['setTab']
 	tabs: { value: EnumLastTasksFilters; label: string }[]
-	tabActive: number
+	tabActive: EnumLastTasksFilters
+	onChange?: (tabActive: EnumLastTasksFilters) => void
 }
 
-const Tabs: FC<Props> = ({ switchTab, tabActive, tabs }) => {
+const Tabs: FC<Props> = ({ switchTab, tabActive, onChange, tabs }) => {
 	const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
 
 	return (
-		<section className='mb-3 relative'>
+		<div className='mb-3 relative'>
 			<div className='flex gap-8 mb-2'>
 				{tabs.map(({ label, value }, id) => {
 					const isActive = tabActive === id
@@ -25,7 +26,10 @@ const Tabs: FC<Props> = ({ switchTab, tabActive, tabs }) => {
 								'text-color font-bold': isActive,
 								'text-grey-for-text cursor-pointer ': !isActive
 							})}
-							onClick={() => switchTab(value)}
+							onClick={() => {
+								switchTab(value)
+								if (onChange) onChange(value)
+							}}
 							aria-controls={`panel-${value}`}
 							aria-selected={isActive}
 							ref={el => {
@@ -39,20 +43,20 @@ const Tabs: FC<Props> = ({ switchTab, tabActive, tabs }) => {
 						</button>
 					)
 				})}
-				{tabActive !== null && (
+				{tabActive !== null && tabRefs.current[tabActive] && (
 					<m.div
 						className='absolute bottom-0 h-1 w-2/3 rounded-none bg-primary'
 						transition={{ type: 'spring', stiffness: 400, damping: 30 }}
 						animate={{
-							width: tabRefs.current[tabActive]?.offsetWidth || 0,
-							x: tabRefs.current[tabActive]?.offsetLeft || 0
+							width: tabRefs.current[tabActive].offsetWidth || 0,
+							x: tabRefs.current[tabActive].offsetLeft || 0
 						}}
-						initial={false}
+						initial={true}
 					/>
 				)}
 			</div>
 			<hr className='color-gray-400' />
-		</section>
+		</div>
 	)
 }
 
