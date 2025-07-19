@@ -1,41 +1,46 @@
 import cn from 'clsx'
-import {
-	BookOpen,
-	BriefcaseBusiness,
-	Hammer,
-	MonitorSmartphone,
-	Plane,
-	ShoppingBasket,
-	type LucideIcon
-} from 'lucide-react'
+import { Calendar, List, Plane } from 'lucide-react'
 import { type FC } from 'react'
 
+import { EnumIcons } from 'src/types/task.types'
+
 export interface IIcon {
-	icon?: LucideIcon
+	icon?: EnumIcons
+	value: keyof typeof EnumIcons
 	id: number
 }
 type Props = { onChange: (prop: IIcon) => void; value?: IIcon }
 
-const icons: LucideIcon[] = [
-	Plane,
-	ShoppingBasket,
-	BriefcaseBusiness,
-	MonitorSmartphone,
-	Hammer,
-	BookOpen
+export const ICONS: IIcon[] = [
+	{
+		value: 'CALENDAR',
+		icon: Calendar,
+		id: 0
+	},
+	{
+		value: 'CHECKLIST',
+		icon: List,
+		id: 1
+	},
+	{
+		value: 'PLANE',
+		icon: Plane,
+		id: 2
+	}
 ]
 
 export const PickIcon: FC<Props> = ({ onChange, value }) => {
 	return (
 		<div className='flex gap-3'>
-			{icons.map((Icon, i) => {
+			{ICONS.map((icons, i) => {
 				const isActive = value?.id === i
+				const Icon = icons.icon
 
 				return (
 					<button
 						key={i}
 						onClick={e => {
-							onChange({ icon: Icon, id: i })
+							onChange(icons)
 							e.preventDefault()
 						}}
 						disabled={isActive}
@@ -44,7 +49,7 @@ export const PickIcon: FC<Props> = ({ onChange, value }) => {
 							'border-primary bg-primary text-white': isActive
 						})}
 					>
-						<Icon />
+						{Icon && <Icon />}
 					</button>
 				)
 			})}

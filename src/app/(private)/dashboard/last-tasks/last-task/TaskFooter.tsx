@@ -1,11 +1,13 @@
 import { Image, Link, MessageSquareDot, Pencil, Plus } from 'lucide-react'
 import type { FC } from 'react'
-import type { ITask } from 'src/types/dashboard.types'
-import type { LastTaskProps } from '../LastTask'
+
+import type { ITask } from 'src/types/task.types'
+
+import type { LastTaskProps } from '../last-tasks.types'
 
 type Props = { openEditModal: (task: ITask) => void } & LastTaskProps
 
-export const LastTaskFooter: FC<Props> = ({ task, openEditModal }) => {
+export const TaskFooter: FC<Props> = ({ task, openEditModal }) => {
 	return (
 		<div className='flex gap-2 justify-between'>
 			<div className='flex items-center gap-5'>

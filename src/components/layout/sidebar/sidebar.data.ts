@@ -8,7 +8,7 @@ import {
 	UsersRound,
 	type LucideIcon
 } from 'lucide-react'
-import { PAGES } from 'src/config/pages-config'
+import { DASHBOARD_PAGES } from 'src/config/dashboard-pages-config'
 
 type TLink = {
 	href: string
@@ -19,38 +19,38 @@ type TLink = {
 
 export const MAIN_LINKS: TLink[] = [
 	{
-		href: PAGES.DASHBOARD,
+		href: DASHBOARD_PAGES.DASHBOARD,
 		label: 'Dashboard',
 		icon: LayoutPanelLeft,
 		isHome: true
 	},
 	{
-		href: PAGES.MESSAGES,
+		href: DASHBOARD_PAGES.MESSAGES,
 		label: 'Messages',
 		icon: MessageCircle
 	},
 	{
-		href: PAGES.INSIGHT,
+		href: DASHBOARD_PAGES.INSIGHT,
 		label: 'Insight',
 		icon: AlignEndHorizontal
 	},
 	{
-		href: PAGES.TEAM,
+		href: DASHBOARD_PAGES.TEAM,
 		label: 'Team',
 		icon: UsersRound
 	},
 	{
-		href: PAGES.SCHEDULE,
+		href: DASHBOARD_PAGES.SCHEDULE,
 		label: 'Schedule',
 		icon: CalendarDays
 	},
 	{
-		href: PAGES.REPORT,
+		href: DASHBOARD_PAGES.REPORT,
 		label: 'Report',
 		icon: Notebook
 	},
 	{
-		href: PAGES.SETTINGS,
+		href: DASHBOARD_PAGES.SETTINGS,
 		label: 'Settings',
 		icon: Settings
 	}

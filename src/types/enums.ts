@@ -1,13 +1,12 @@
-export const EnumLastTasksFilters = {
-	ALL: 0,
-	ACTIVE: 1,
-	COMPLETED: 2
+export const EnumActivitySort = {
+	COMPLETED: 'COMPLETED',
+	ACTIVE: 'ACTIVE',
+	ALL: 'ALL'
 } as const
-export type EnumLastTasksFilters = (typeof EnumLastTasksFilters)[keyof typeof EnumLastTasksFilters]
+export type EnumActivitySort = (typeof EnumActivitySort)[keyof typeof EnumActivitySort]
 
-export const EnumDeadlineSort = {
-	UPPER: 0,
-	LOWER: 1,
-	NONE: 2
+export const EnumDueDateSort = {
+	OLDEST: 'OLDEST',
+	NEWEST: 'NEWEST'
 } as const
-export type EnumDeadlineSort = (typeof EnumDeadlineSort)[keyof typeof EnumDeadlineSort]
+export type EnumDueDateSort = (typeof EnumDueDateSort)[keyof typeof EnumDueDateSort]

@@ -1,4 +1,5 @@
 'use client'
+
 import { ThemeProvider } from 'next-theme'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'

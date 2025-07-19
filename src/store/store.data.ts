@@ -1,11 +1,15 @@
-import { LASTS_TASKS } from 'src/app/(private)/dashboard/data/dashboard.data'
-import { EnumDeadlineSort, EnumLastTasksFilters } from 'src/types/enums'
-import type { ITabsStore, ITasksStore } from './store.types'
+import { EnumActivitySort, EnumDueDateSort } from 'src/types/enums'
+
+import type { IStore, ITabsStore } from './store.types'
 
 export const initialTabsStore: Pick<ITabsStore, 'tabsActive'> = {
-	tabsActive: EnumLastTasksFilters.ALL
+	tabsActive: EnumActivitySort.ALL
 }
-export const initialTasksStore: Pick<ITasksStore, 'tasks' | 'sortTerm'> = {
-	tasks: LASTS_TASKS,
-	sortTerm: EnumDeadlineSort.NONE
+
+export const initialQueryParams: Pick<IStore, 'queryParams'> = {
+	queryParams: {
+		sort: EnumActivitySort.ALL,
+		searchTerm: '',
+		dueDate: EnumDueDateSort.NEWEST
+	}
 }

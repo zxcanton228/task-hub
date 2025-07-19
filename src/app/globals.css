@@ -10,6 +10,7 @@
 		--primary: #725cee;
 		--pink: #fdc2f6;
 		--grey: #a9a8a9;
+		--red: #f12c2c;
 		--text: #000000;
 		--purple: #e1cdff;
 		/* --foreground-gradient: linear-gradient() */
@@ -44,6 +45,7 @@
 	--color-primary: var(--primary);
 	--color-pink: var(--pink);
 	--color-text: var(--text);
+	--color-red: var(--red);
 	--color-grey: var(--grey);
 	--color-purple: {
 		--400: #e1cdff;
@@ -72,6 +74,7 @@ body {
 	font-family: var(--font), Helvetica, sans-serif;
 	display: flex;
 }
+
 body,
 html {
 	height: 100% !important;

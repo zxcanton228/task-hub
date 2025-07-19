@@ -20,14 +20,14 @@ export const Field: FC<Props> = ({
 }) => (
 	<div className={`field ${classNameOfWrapper}`}>
 		<label>
-			<span className='text-lg font-bold'>{label ?? ''}</span>
-			{!!error && (
-				<div className='text-white bg-red text-sm w-44 p-1 text-center rounded-t-md'>{error}</div>
-			)}
+			<div className='flex items-center justify-between'>
+				<span className='text-lg font-bold'>{label ?? ''}</span>
+				{!!error && <p className='text-red text-sm '>{error}</p>}
+			</div>
 
 			<input
 				className={twMerge(
-					`border border-gray-400 rounded-lg ${error ? 'field__error' : ''}`,
+					`border border-gray-400 rounded-lg ${!!error ? 'field__error' : ''}`,
 					className
 				)}
 				{...props}

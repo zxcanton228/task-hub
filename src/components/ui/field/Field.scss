@@ -13,4 +13,7 @@
 			}
 		}
 	}
+	.field__error {
+		border: 1px solid var(--red);
+	}
 }

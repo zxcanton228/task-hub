@@ -1,15 +1,14 @@
-import type { ITask, ITaskForm } from 'src/types/dashboard.types'
-import type { EnumDeadlineSort, EnumLastTasksFilters } from 'src/types/enums'
+import type { EnumActivitySort } from 'src/types/enums'
+import type { IGetAllTasksDto } from 'src/types/task.types'
+
+export interface IStore {
+	queryParams: IGetAllTasksDto
+	isFilterUpdated: boolean
+	updateQueryParam: (data: { key: keyof IGetAllTasksDto; value: string }) => void
+	reset: () => void
+}
 
 export interface ITabsStore {
-	tabsActive: EnumLastTasksFilters
-	setTab: (num: EnumLastTasksFilters) => void
-}
-export interface ITasksStore {
-	tasks: ITask[]
-	sortTerm: EnumDeadlineSort
-	editTask: (id: number, data: ITaskForm) => void
-	sortByStatus: (status: EnumLastTasksFilters) => void
-	sortByDeadline: (sort: EnumDeadlineSort) => void
-	setSortTerm: (sortTerm: EnumDeadlineSort) => void
+	tabsActive: EnumActivitySort
+	setTab: (num: EnumActivitySort) => void
 }

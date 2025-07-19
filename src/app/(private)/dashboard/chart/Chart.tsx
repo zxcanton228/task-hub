@@ -1,4 +1,4 @@
-import { useMemo, type FC } from 'react'
+import { type FC, useMemo } from 'react'
 import {
 	Area,
 	AreaChart,
@@ -6,10 +6,12 @@ import {
 	ReferenceLine,
 	ResponsiveContainer,
 	Tooltip,
-	XAxis /*LineChart, Line, , YAxis, Tooltip*/,
+	XAxis,
 	YAxis
 } from 'recharts'
+
 import type { IChartDataPoint } from 'src/types/chart.types'
+
 import { ChartTooltip } from './ChartTooltip'
 
 type Props = { data: IChartDataPoint[] }
@@ -21,12 +23,12 @@ export const Chart: FC<Props> = ({ data }) => {
 		let maxVal = 0
 		let maxPeriod = ''
 
-		data.forEach(({ period: month, value }) => {
+		for (const { period, value } of data) {
 			if (value > maxVal) {
 				maxVal = value
-				maxPeriod = month
+				maxPeriod = period
 			}
-		})
+		}
 
 		return { value: maxVal, period: maxPeriod }
 	}, [data])
@@ -34,7 +36,8 @@ export const Chart: FC<Props> = ({ data }) => {
 	return (
 		<ResponsiveContainer
 			width='100%'
-			height={300}
+			height={'500px'}
+			aspect={3}
 		>
 			<AreaChart
 				data={data}
@@ -44,8 +47,8 @@ export const Chart: FC<Props> = ({ data }) => {
 					<linearGradient
 						id='colorGradient'
 						x1='0'
-						y1='0'
 						x2='0'
+						y1='0'
 						y2='1'
 					>
 						<stop
@@ -74,7 +77,7 @@ export const Chart: FC<Props> = ({ data }) => {
 				<YAxis
 					tick={{ fontSize: 12, fill: '#9CA3AF' }}
 					domain={[0, 'dataMax + 10']}
-					dataKey='period'
+					dataKey='value'
 					axisLine={false}
 					tickLine={false}
 				/>
@@ -82,7 +85,7 @@ export const Chart: FC<Props> = ({ data }) => {
 					content={<ChartTooltip />}
 					cursor={false}
 				/>
-				{maxData && (
+				{!!maxData && (
 					<ReferenceLine
 						strokeDasharray='5 5'
 						x={maxData.period}
@@ -93,8 +96,8 @@ export const Chart: FC<Props> = ({ data }) => {
 				<Area
 					fill='url(#colorGradient)'
 					stroke='#6366F1'
-					type='monotone'
 					dataKey='value'
+					type='monotone'
 					strokeWidth={2}
 					fillOpacity={1}
 				/>
