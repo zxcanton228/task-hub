@@ -6,7 +6,7 @@ import { Header } from 'src/components/layout/header/Header'
 
 import { ProjectsStats } from './ProjectsStats'
 import { ProjectChart } from './chart/ProjectsChart'
-import { Tasks } from './last-tasks/Tasks'
+import { Tasks } from './tasks/Tasks'
 import { TodayTasks } from './today-tasks/TodayTasks'
 
 type Props = {}

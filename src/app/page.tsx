@@ -1,3 +1,7 @@
+import { redirect } from 'next/navigation'
+
+import { DASHBOARD_PAGES } from 'src/config/dashboard-pages-config'
+
 export default function Home() {
-	return <div></div>
+	redirect(DASHBOARD_PAGES.DASHBOARD)
 }

@@ -1,5 +1,6 @@
-import { axiosAuth } from 'src/api/axios'
+import { axiosAuth, axiosClassic } from 'src/api/axios'
 
+import { AuthToken } from 'src/types/auth.types'
 import type { IGetAllTasks, IGetAllTasksDto, ITask, ITaskData } from 'src/types/task.types'
 
 class TaskService {
@@ -7,6 +8,19 @@ class TaskService {
 
 	public async getAll(params: IGetAllTasksDto = {}) {
 		const { data } = await axiosAuth.get<IGetAllTasks>(this._BASE_URL, { params })
+		return data
+	}
+	public async getAllServer(
+		params: IGetAllTasksDto = {},
+		accessToken: string,
+		refreshToken: string
+	) {
+		const { data } = await axiosClassic.get<IGetAllTasks>(this._BASE_URL, {
+			params,
+			headers: {
+				Cookie: `${AuthToken.ACCESS_TOKEN}=${accessToken}; ${AuthToken.ACCESS_TOKEN}=${refreshToken}`
+			}
+		})
 		return data
 	}
 	public async edit(body: ITaskData, id: string) {

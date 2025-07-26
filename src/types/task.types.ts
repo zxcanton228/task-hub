@@ -1,5 +1,5 @@
 import { Calendar, List, Plane } from 'lucide-react'
-import type { IIcon } from 'src/app/(private)/dashboard/last-tasks/edit-task/PickIcon'
+import type { IIcon } from 'src/app/(private)/dashboard/tasks/edit-task/PickIcon'
 
 import type { EnumActivitySort, EnumDueDateSort } from './enums'
 import type { IPaginationParams } from './types'

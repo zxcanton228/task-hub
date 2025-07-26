@@ -11,10 +11,12 @@ import type { ITask } from 'src/types/task.types'
 
 export function useTasks(setIsShow: (v: boolean) => void) {
 	const { isFilterUpdated, queryParams, updateQueryParams } = useFilters()
+
 	const { data: tasks, refetch } = useQuery({
 		queryKey: ['tasks', queryParams],
 		queryFn: () => taskService.getAll(queryParams),
-		enabled: isFilterUpdated
+		enabled: isFilterUpdated,
+		initialData: { length: 0, tasks: [] }
 	})
 
 	const [pickedTask, setPickedTask] = useState<ITask | null>(null)

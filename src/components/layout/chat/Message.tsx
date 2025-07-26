@@ -1,28 +1,47 @@
 import cn from 'clsx'
+import Image from 'next/image'
 import type { FC } from 'react'
 
-type Props = { isMy?: boolean }
+import type { IMessage } from './chat.types'
 
-export const Message: FC<Props> = ({ isMy = false }) => {
+type Props = { isMy?: boolean; message: IMessage }
+
+const convertDate = (date: string = '') => new Date(date).toTimeString().slice(0, 5)
+
+export const Message: FC<Props> = ({ isMy = false, message: { text, updatedAt, user } }) => {
+	const date = convertDate(updatedAt)
+
 	return (
-		<article className={cn('flex gap-3', { 'flex-row-reverse': isMy })}>
-			<div className='bg-white w-12 h-12 rounded-full' />
+		<li className={cn('flex gap-3', { 'flex-row-reverse': isMy })}>
+			{!!user.avatarPath ? (
+				<Image
+					className='w-12 h-12 rounded-full'
+					src={user.avatarPath + '.jpg'}
+					alt={user.name + ' avatar'}
+					height={48}
+					width={48}
+				/>
+			) : (
+				<div className='bg-white w-12 h-12 rounded-full' />
+			)}
 			<div className='flex flex-col'>
-				<div className={cn('flex items-center gap-2', { 'flex-row-reverse': isMy })}>
-					<h4 className={'font-bold'}>Sheila Dara</h4>
-					<time
-						className='text-sm text-gray-300'
-						dateTime=''
-					>
-						09:47
-					</time>
-				</div>
+				{
+					<div className={cn('flex items-center gap-2', { 'flex-row-reverse': isMy })}>
+						<h4 className={'font-bold'}>{user.name || 'Test user'}</h4>
+						<time
+							className='text-sm text-gray-300'
+							dateTime={date}
+						>
+							{date}
+						</time>
+					</div>
+				}
 				<p
 					className={`${isMy ? 'bg-[#604aec] rounded-tr-none' : 'bg-[#5a51b0] rounded-tl-none'} rounded-2xl p-3`}
 				>
-					Good morning! I've been working on the design element
+					{text}
 				</p>
 			</div>
-		</article>
+		</li>
 	)
 }

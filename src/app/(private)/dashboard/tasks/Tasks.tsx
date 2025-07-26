@@ -32,15 +32,12 @@ export const Tasks: FC = () => {
 		setTab
 	} = useTasks(setIsShow)
 
-	if (!tasksData) return <h1>No tasks</h1>
-	const { tasks, length } = tasksData
-
 	return (
 		<div className='mt-3'>
 			<div className='flex flex-col gap-2'>
 				<div className='flex items-center gap-3'>
 					<Heading>
-						Last Tasks <span>({tasks ? length : 0})</span>
+						Last Tasks <span>({tasksData?.tasks ? tasksData?.length : 0})</span>
 					</Heading>
 					<button
 						onClick={handleSwitchSort}
@@ -68,8 +65,8 @@ export const Tasks: FC = () => {
 			</div>
 
 			<div className='grid-cols-3 grid gap-5'>
-				{tasks && !!length ? (
-					tasks.map((task, i) => (
+				{tasksData?.tasks && !!tasksData?.length ? (
+					tasksData?.tasks.map((task, i) => (
 						<Task
 							openEditModal={handlePickTask}
 							task={task}

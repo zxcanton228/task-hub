@@ -1,8 +1,9 @@
 import axios, { type CreateAxiosDefaults } from 'axios'
-
-import { API_URL } from 'src/constants/constants'
 import authTokenService from 'src/services/auth/auth-token.service'
 import authService from 'src/services/auth/auth.service'
+
+import { API_URL } from 'src/constants/constants'
+
 import { errorCatch } from './api.helper'
 
 const axiosOptions: CreateAxiosDefaults = {
