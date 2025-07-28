@@ -1,6 +1,6 @@
 'use client'
 
-import { type FC, useState } from 'react'
+import { type FC, memo, useState } from 'react'
 
 import type { ITimeRange } from 'src/types/chart.types'
 
@@ -10,17 +10,21 @@ import { Chart } from './Chart'
 import { ChartHeader } from './ChartHeader'
 
 type Props = {}
-export const ProjectChart: FC<Props> = () => {
+
+// RERENDER постоянно появляется без memo
+export const ProjectChart: FC<Props> = memo(() => {
 	const state = useState<ITimeRange>(TIME_RANGES_DATA[1])
 
 	const chartData = state[0].value === 'yearly' ? YEARLY_DATA : MONTHLY_DATA
 
+	console.log('RERENDEr')
+
 	return (
-		<div className='bg-foreground w-full max-h-[450px] p-4 rounded-xl'>
+		<div className='bg-foreground w-full  p-4 rounded-xl'>
 			<ChartHeader state={state} />
-			<div className='flex items-center mt-10'>
+			<div className='flex items-center mt-10 h-[450px]'>
 				<Chart data={chartData()} />
 			</div>
 		</div>
 	)
-}
+})

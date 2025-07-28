@@ -1,7 +1,10 @@
-import { axiosAuth, axiosClassic } from 'src/api/axios'
+import type { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
 
-import { AuthToken } from 'src/types/auth.types'
+import { axiosAuth } from 'src/api/axios'
+
 import type { IGetAllTasks, IGetAllTasksDto, ITask, ITaskData } from 'src/types/task.types'
+
+import authTokenService from './auth/auth-token.service'
 
 class TaskService {
 	private readonly _BASE_URL = '/tasks'
@@ -10,15 +13,14 @@ class TaskService {
 		const { data } = await axiosAuth.get<IGetAllTasks>(this._BASE_URL, { params })
 		return data
 	}
-	public async getAllServer(
-		params: IGetAllTasksDto = {},
-		accessToken: string,
-		refreshToken: string
-	) {
-		const { data } = await axiosClassic.get<IGetAllTasks>(this._BASE_URL, {
+
+	public async getAllServer(params: IGetAllTasksDto = {}, cookiesStorage: ReadonlyRequestCookies) {
+		const { accessToken } = await authTokenService.getServerTokens(cookiesStorage)
+
+		const { data } = await axiosAuth.get<IGetAllTasks>(this._BASE_URL, {
 			params,
 			headers: {
-				Cookie: `${AuthToken.ACCESS_TOKEN}=${accessToken}; ${AuthToken.ACCESS_TOKEN}=${refreshToken}`
+				Authorization: `Bearer ${accessToken}`
 			}
 		})
 		return data

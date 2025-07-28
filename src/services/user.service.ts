@@ -12,6 +12,7 @@ class UserService {
 	}
 	public async getProfile() {
 		const { data } = await axiosAuth.get<IUser>(`${this._BASE_URL}/profile`)
+
 		return data
 	}
 }

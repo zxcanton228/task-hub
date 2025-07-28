@@ -17,8 +17,8 @@ class AuthTokenService {
 	}
 	public getServerTokens(cookiesStorage: ReadonlyRequestCookies) {
 		const accessToken = cookiesStorage.get(AuthToken.ACCESS_TOKEN)?.value || ''
-		const refreshToken = cookiesStorage.get(AuthToken.REFRESH_TOKEN)?.value || ''
-		return { accessToken, refreshToken }
+
+		return { accessToken }
 	}
 
 	public removeAccessToken = () => {

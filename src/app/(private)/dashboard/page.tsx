@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { cookies } from 'next/headers'
+import taskService from 'src/services/task.service'
 
 import { SEO } from 'src/constants/seo.constants'
 
@@ -10,15 +12,9 @@ export const metadata: Metadata = {
 }
 
 export default async function DashboardPage() {
-	// try {
-	// 	const cookiesStorage = await cookies()
+	const cookiesStorage = await cookies()
 
-	// 	const { accessToken, refreshToken } = await authTokenService.getServerTokens(cookiesStorage)
-	// 	const tasks = await taskService.getAllServer({}, accessToken, refreshToken)
+	const tasks = await taskService.getAllServer({}, cookiesStorage)
 
-	// 	console.log(tasks)
-	// } catch (error) {
-	// 	console.error(error)
-	// }
-	return <Dashboard />
+	return <Dashboard initialTasks={tasks} />
 }

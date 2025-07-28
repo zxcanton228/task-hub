@@ -12,13 +12,13 @@ export const TaskFooter: FC<Props> = ({ task, openEditModal }) => {
 		<div className='flex gap-2 justify-between'>
 			<div className='flex items-center gap-5'>
 				<span className='flex items-center gap-1 text-lg'>
-					<MessageSquareDot size={15} /> {task.messages}
+					<MessageSquareDot size={15} /> {task.messages || 0}
 				</span>
 				<span className='flex items-center gap-1 text-lg'>
-					<Image size={15} /> {task.images}
+					<Image size={15} /> {task.images || 0}
 				</span>
 				<span className='flex items-center gap-1 text-lg'>
-					<Link size={15} /> {task.links}
+					<Link size={15} /> {task.links || 0}
 				</span>
 			</div>
 			<div className='flex gap-2'>

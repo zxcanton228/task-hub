@@ -36,7 +36,7 @@ export const Chart: FC<Props> = ({ data }) => {
 	return (
 		<ResponsiveContainer
 			width='100%'
-			height={'500px'}
+			height={'450px'}
 			aspect={3}
 		>
 			<AreaChart

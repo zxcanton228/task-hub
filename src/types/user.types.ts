@@ -9,3 +9,4 @@ export interface IUser {
 	email: string
 	id: string
 }
+export type TPublicUser = Omit<IUser, 'rights' | 'verificationToken' | 'password'>

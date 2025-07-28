@@ -42,10 +42,10 @@ export const AuthForm: FC<Props> = ({ isLogin = false }) => {
 
 				<ReCAPTCHA
 					sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+					theme={theme as 'light' | 'dark'}
 					className='m-[0_auto]'
 					ref={recaptchaRef}
 					size='normal'
-					theme={theme as 'light' | 'dark'}
 				/>
 
 				<button

@@ -4,14 +4,16 @@ import type { FC } from 'react'
 
 import { Header } from 'src/components/layout/header/Header'
 
+import type { IGetAllTasks } from 'src/types/task.types'
+
 import { ProjectsStats } from './ProjectsStats'
 import { ProjectChart } from './chart/ProjectsChart'
 import { Tasks } from './tasks/Tasks'
 import { TodayTasks } from './today-tasks/TodayTasks'
 
-type Props = {}
+type Props = { initialTasks: IGetAllTasks }
 
-export const Dashboard: FC<Props> = () => {
+export const Dashboard: FC<Props> = ({ initialTasks }) => {
 	return (
 		<div>
 			<Header title='Dashboard' />
@@ -21,7 +23,7 @@ export const Dashboard: FC<Props> = () => {
 					<ProjectChart />
 				</div>
 
-				<Tasks />
+				<Tasks initialTasks={initialTasks} />
 				<TodayTasks />
 			</div>
 		</div>

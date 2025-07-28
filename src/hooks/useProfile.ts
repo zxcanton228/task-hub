@@ -19,9 +19,11 @@ export function useProfile() {
 
 	const userState = data ? transformUserToState(data) : null
 
+	const user = data && userState ? { ...data, ...userState } : null
+
 	return {
 		isLoading,
 		refetch,
-		user: { ...data, ...userState }
+		user
 	}
 }

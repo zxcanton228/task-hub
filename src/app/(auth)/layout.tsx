@@ -6,7 +6,10 @@ import { AuthTitle } from './auth-form/AuthTitle'
 
 export default function AuthLayout({ children }: PropsWithChildren<unknown>) {
 	return (
-		<html suppressHydrationWarning>
+		<html
+			suppressHydrationWarning
+			lang='en'
+		>
 			<body>
 				<Providers>
 					<main className='flex items-center justify-center w-full'>

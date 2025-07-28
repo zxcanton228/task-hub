@@ -7,16 +7,16 @@ import { useTabsStore } from 'src/store/store'
 import { useFilters } from 'src/hooks/useFilters'
 
 import { EnumActivitySort, EnumDueDateSort } from 'src/types/enums'
-import type { ITask } from 'src/types/task.types'
+import type { IGetAllTasks, ITask } from 'src/types/task.types'
 
-export function useTasks(setIsShow: (v: boolean) => void) {
+export function useTasks(setIsShow: (v: boolean) => void, initialTasks: IGetAllTasks) {
 	const { isFilterUpdated, queryParams, updateQueryParams } = useFilters()
 
 	const { data: tasks, refetch } = useQuery({
 		queryKey: ['tasks', queryParams],
 		queryFn: () => taskService.getAll(queryParams),
 		enabled: isFilterUpdated,
-		initialData: { length: 0, tasks: [] }
+		initialData: initialTasks
 	})
 
 	const [pickedTask, setPickedTask] = useState<ITask | null>(null)

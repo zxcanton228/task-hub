@@ -8,6 +8,7 @@ import type { FC } from 'react'
 import { useOutside } from 'src/hooks/useOutside'
 
 import { EnumActivitySort, EnumDueDateSort } from 'src/types/enums'
+import type { IGetAllTasks } from 'src/types/task.types'
 
 import { Heading } from 'ui/Heading'
 import { Tabs } from 'ui/tabs/Tabs'
@@ -17,7 +18,9 @@ import { useTasks } from './useTasks'
 
 const DynamicEditModal = dynamic(() => import('./edit-task/Edit.modal').then(mod => mod.EditModal))
 
-export const Tasks: FC = () => {
+type Props = { initialTasks: IGetAllTasks }
+
+export const Tasks: FC<Props> = ({ initialTasks }) => {
 	const { isShow, ref, setIsShow } = useOutside()
 
 	const {
@@ -30,7 +33,7 @@ export const Tasks: FC = () => {
 		refetch,
 		dueDate,
 		setTab
-	} = useTasks(setIsShow)
+	} = useTasks(setIsShow, initialTasks)
 
 	return (
 		<div className='mt-3'>

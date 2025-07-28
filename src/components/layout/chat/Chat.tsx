@@ -1,48 +1,34 @@
 'use client'
 
 import { Paperclip } from 'lucide-react'
-import Image from 'next/image'
+import type { FC } from 'react'
 
-import { useProfile } from 'src/hooks/useProfile'
-
+import { ChatHeader } from './ChatHeader'
 import { Message } from './Message'
 import { useChat } from './useChat'
 
-export const Chat = ({ chatId = 'cmdjekac10000148gxelxmonn' }: { chatId?: string }) => {
-	const { user } = useProfile()
-	const { message, messages, handleSendMessage, setMessage, companion } = useChat(
-		chatId,
-		user.id || ''
-	)
+type Props = {
+	closeChat: () => void
+	userId: string
+	chatId: string
+}
+
+export const Chat: FC<Props> = ({ chatId, userId, closeChat }) => {
+	const { message, messages, handleSendMessage, setMessage, companion } = useChat(chatId, userId)
 
 	return (
-		<div className='chat w-160 text-white h-screen bg-[#3c3492] max-h-screen fixed right-0 top-0 z-50 flex flex-col'>
-			<div className='max-h-[calc(100%-70px)] overflow-y-scroll'>
+		<>
+			<div className='max-h-[calc(100%-70px)] overflow-y-scroll absolute top-0 left-0 z-100 w-full'>
 				{!!companion && (
-					<div className='w-full bg-[#453c9c] px-6 py-3'>
-						<div className='flex gap-3'>
-							{!!companion.avatarPath ? (
-								<Image
-									src={companion.avatarPath + '.jpg'}
-									className='w-15 h-15 rounded-full'
-									alt={companion.name + ' avatar'}
-									height={60}
-									width={60}
-								/>
-							) : (
-								<div className='bg-white w-12 h-12 rounded-full' />
-							)}
-							<div className='flex flex-col justify-center'>
-								<h4 className='text-lg font-bold'>{companion.name}</h4>
-								<span className='text-sm'>{companion.email}</span>
-							</div>
-						</div>
-					</div>
+					<ChatHeader
+						closeChat={closeChat}
+						user={companion}
+					/>
 				)}
 				<ul className='flex p-6 flex-col gap-3 w-full max-h-full'>
 					{messages.map(msg => (
 						<Message
-							isMy={msg.userId === user.id}
+							isMy={msg.userId === userId}
 							message={msg}
 							key={msg.id}
 						/>
@@ -62,6 +48,6 @@ export const Chat = ({ chatId = 'cmdjekac10000148gxelxmonn' }: { chatId?: string
 					type='text'
 				/>
 			</form>
-		</div>
+		</>
 	)
 }

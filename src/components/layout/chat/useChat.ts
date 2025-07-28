@@ -3,12 +3,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { type FormEvent, useLayoutEffect, useState } from 'react'
 import io, { Socket } from 'socket.io-client'
+import chatService from 'src/services/chat.service'
 
 import { API_URL } from 'src/constants/constants'
 
-import { axiosAuth } from 'src/api/axios'
-
-import type { IChat, IMessage } from './chat.types'
+import type { IMessage } from './chat.types'
 
 export const useChat = (chatId: string, userId: string) => {
 	const [messages, setMessages] = useState<IMessage[]>([])
@@ -16,27 +15,26 @@ export const useChat = (chatId: string, userId: string) => {
 	const [socket, setSocket] = useState<Socket>()
 
 	const { data, isSuccess } = useQuery({
-		queryFn: () => axiosAuth.get<IChat>(`/chats/${chatId}`),
+		queryFn: () => chatService.getOne(chatId),
 		queryKey: ['get chat', chatId]
 	})
+
+	useLayoutEffect(() => {
+		if (!!data && isSuccess) setMessages(data.messages)
+	}, [data, isSuccess, chatId])
 
 	useLayoutEffect(() => {
 		const newSocket = io(API_URL, { transports: ['websocket', 'polling'], withCredentials: true })
 		setSocket(newSocket)
 
-		newSocket.emit('joinChat', chatId)
-
-		newSocket.on('receiveMessage', newChat => {
-			console.log(new Date())
+		newSocket.emit('joinChat', chatId).on('receiveMessage', newChat => {
 			setMessages(newChat.messages)
 		})
-
-		if (!!data && isSuccess) setMessages(data.data.messages)
 
 		return () => {
 			newSocket.close()
 		}
-	}, [chatId, isSuccess])
+	}, [chatId])
 
 	const sendMessage = (userId: string, text: string) => {
 		if (!socket || message === '') return
@@ -49,7 +47,7 @@ export const useChat = (chatId: string, userId: string) => {
 		sendMessage(userId, message)
 	}
 
-	const companion = data?.data.users.find(u => u.id !== userId)
+	const companion = data?.users.find(u => u.id !== userId)
 
 	return {
 		handleSendMessage,

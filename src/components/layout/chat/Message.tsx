@@ -16,13 +16,13 @@ export const Message: FC<Props> = ({ isMy = false, message: { text, updatedAt, u
 			{!!user.avatarPath ? (
 				<Image
 					className='w-12 h-12 rounded-full'
-					src={user.avatarPath + '.jpg'}
-					alt={user.name + ' avatar'}
+					alt={'Avatar by ' + user.name}
+					src={user.avatarPath}
 					height={48}
 					width={48}
 				/>
 			) : (
-				<div className='bg-white w-12 h-12 rounded-full' />
+				<div className='bg-primary w-12 h-12 rounded-full' />
 			)}
 			<div className='flex flex-col'>
 				{
