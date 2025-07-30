@@ -1,13 +1,13 @@
 'use client'
 
-import { ThemeProvider } from 'next-theme'
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { LazyMotion, domAnimation } from 'framer-motion'
+import { ThemeProvider } from 'next-theme'
 import { Toaster } from 'react-hot-toast'
 
 import { IS_DEV } from 'src/constants/constants'
+
 import type { TWithChildren } from 'src/types/types'
 
 export default function Providers({ children }: TWithChildren) {
@@ -35,7 +35,12 @@ export default function Providers({ children }: TWithChildren) {
 					<Toaster />
 				</LazyMotion>
 
-				{IS_DEV && <ReactQueryDevtools initialIsOpen={false} />}
+				{IS_DEV && (
+					<ReactQueryDevtools
+						initialIsOpen={false}
+						client={client}
+					/>
+				)}
 			</QueryClientProvider>
 		</ThemeProvider>
 	)

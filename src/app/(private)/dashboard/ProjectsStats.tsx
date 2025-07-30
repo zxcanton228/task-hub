@@ -1,16 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { memo } from 'react'
-import userService from 'src/services/user.service'
+import statisticsService from 'src/services/statistics.service'
 
 import { STATS_DATA } from './data/dashboard.data'
 
 export const ProjectsStats = memo(() => {
 	const { data: cardStatistic } = useQuery({
 		queryKey: ['card statistic'],
-		queryFn: () => userService.getCardStatistic()
+		queryFn: () => statisticsService.getStatistic()
 	})
-	console.log('RERENDER')
 
 	return (
 		!!cardStatistic && (

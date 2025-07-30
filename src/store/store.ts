@@ -1,8 +1,14 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { initialQueryParams, initialTabsStore } from './store.data'
-import type { IStore, ITabsStore } from './store.types'
+import type { TChartValue } from 'src/types/chart.types'
+
+import {
+	initialChartTypeQueryParams,
+	initialGetAllTasksQueryParams,
+	initialTabsStore
+} from './store.data'
+import type { IChartTypeStore, IGetAllTasksStore, ITabsStore } from './store.types'
 
 export const useTabsStore = create<ITabsStore>()(
 	persist(
@@ -17,8 +23,8 @@ export const useTabsStore = create<ITabsStore>()(
 		{ name: 'tabs' }
 	)
 )
-export const useFiltersStore = create<IStore>(set => ({
-	...initialQueryParams,
+export const useFiltersStore = create<IGetAllTasksStore>(set => ({
+	...initialGetAllTasksQueryParams,
 	isFilterUpdated: false,
 
 	updateQueryParam: ({ key, value }) =>
@@ -27,5 +33,17 @@ export const useFiltersStore = create<IStore>(set => ({
 			isFilterUpdated: true
 		})),
 
-	reset: () => set(() => ({ ...initialQueryParams, isFilterUpdated: true }))
+	reset: () => set(() => ({ ...initialGetAllTasksQueryParams, isFilterUpdated: true }))
+}))
+export const useChatTypeStore = create<IChartTypeStore>(set => ({
+	...initialChartTypeQueryParams,
+	isFilterUpdated: false,
+
+	updateQueryParam: value =>
+		set(() => ({
+			queryParams: { chartType: value as TChartValue },
+			isFilterUpdated: true
+		})),
+
+	reset: () => set(() => ({ ...initialChartTypeQueryParams, isFilterUpdated: true }))
 }))

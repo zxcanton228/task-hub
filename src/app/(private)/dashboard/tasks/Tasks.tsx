@@ -36,11 +36,11 @@ export const Tasks: FC<Props> = ({ initialTasks }) => {
 	} = useTasks(setIsShow, initialTasks)
 
 	return (
-		<div className='mt-3'>
-			<div className='flex flex-col gap-2'>
-				<div className='flex items-center gap-3'>
+		<div className='mt-7'>
+			<div className='flex flex-col gap-4 mb-7'>
+				<div className='flex items-center gap-4'>
 					<Heading>
-						Last Tasks <span>({tasksData?.tasks ? tasksData?.length : 0})</span>
+						Tasks <span>({tasksData?.tasks ? tasksData?.length : 0})</span>
 					</Heading>
 					<button
 						onClick={handleSwitchSort}
@@ -67,7 +67,7 @@ export const Tasks: FC<Props> = ({ initialTasks }) => {
 				/>
 			</div>
 
-			<div className='grid-cols-3 grid gap-5'>
+			<div className='grid-cols-3 grid gap-7'>
 				{tasksData?.tasks && !!tasksData?.length ? (
 					tasksData?.tasks.map((task, i) => (
 						<Task

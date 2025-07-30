@@ -1,0 +1,23 @@
+# Build
+node_modules
+.next
+
+# Workspace
+Dockerfile
+.gitignore
+.DS_Store
+.vscode
+.github
+.idea
+
+# Testing
+tests/__snapshots__
+__snapshots__
+coverage
+babel.*
+jest.*
+tests
+.swc
+
+# Environments
+.env.development

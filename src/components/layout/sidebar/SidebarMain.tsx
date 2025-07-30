@@ -3,9 +3,11 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { FC } from 'react'
-import { PAGES } from 'src/config/pages-config'
-import { MAIN_LINKS } from './sidebar.data'
+
+import { DASHBOARD_PAGES } from 'src/config/dashboard-pages-config'
+
 import { SidebarHeading } from './SidebarHeading'
+import { MAIN_LINKS } from './sidebar.data'
 
 export const MainSidebar: FC = () => {
 	const path = usePathname()
@@ -16,7 +18,7 @@ export const MainSidebar: FC = () => {
 			<nav className='flex flex-col text-xl px-5'>
 				{MAIN_LINKS.map(({ href, label, icon: Icon, isHome }) => {
 					const isActive: boolean =
-						path === PAGES.DASHBOARD ? !!isHome : !isHome && path.startsWith(href)
+						path === DASHBOARD_PAGES.DASHBOARD ? !!isHome : !isHome && path.startsWith(href)
 
 					return (
 						<Link

@@ -1,15 +1,21 @@
 import { EnumActivitySort, EnumDueDateSort } from 'src/types/enums'
 
-import type { IStore, ITabsStore } from './store.types'
+import type { IChartTypeStore, IGetAllTasksStore, ITabsStore } from './store.types'
 
 export const initialTabsStore: Pick<ITabsStore, 'tabsActive'> = {
 	tabsActive: EnumActivitySort.ALL
 }
 
-export const initialQueryParams: Pick<IStore, 'queryParams'> = {
+export const initialGetAllTasksQueryParams: Pick<IGetAllTasksStore, 'queryParams'> = {
 	queryParams: {
+		dueDate: EnumDueDateSort.NEWEST,
 		sort: EnumActivitySort.ALL,
 		searchTerm: '',
-		dueDate: EnumDueDateSort.NEWEST
+		chartType: 'yearly'
+	}
+}
+export const initialChartTypeQueryParams: Pick<IChartTypeStore, 'queryParams'> = {
+	queryParams: {
+		chartType: 'yearly'
 	}
 }

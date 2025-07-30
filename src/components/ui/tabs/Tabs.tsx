@@ -20,7 +20,7 @@ export const Tabs: FC<Props> = ({ switchTab, tabActive, onChange, tabs }) => {
 	const i = tabs.findIndex(t => t.value === tabActive)
 
 	return (
-		<div className='mb-3 relative'>
+		<div className='relative'>
 			<div className='flex gap-8 mb-2'>
 				{tabs.map(({ label, value }, id) => {
 					const isActive = tabActive === value
@@ -34,7 +34,7 @@ export const Tabs: FC<Props> = ({ switchTab, tabActive, onChange, tabs }) => {
 								switchTab(value)
 								if (onChange) onChange(value)
 							}}
-							aria-controls={`panel-${value}`}
+							aria-controls={label}
 							aria-selected={isActive}
 							ref={el => {
 								tabRefs.current[id] = el

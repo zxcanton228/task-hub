@@ -28,10 +28,10 @@ export const EditModal: FC<Props> = ({ ref, task, refetchTasks, setIsShow }) => 
 	const { handleSubmit, register, reset, watch, control } = useForm<ITaskForm>({
 		mode: 'onChange',
 		defaultValues: {
-			title: task.title,
+			dueDate: new Date(task.dueDate).toISOString().split('T')[0],
 			status: task.status,
-			color: task.color,
-			dueDate: new Date(task.dueDate).toISOString().split('T')[0]
+			title: task.title,
+			color: task.color
 		}
 	})
 	const { mutateAsync } = useMutation({
@@ -42,6 +42,7 @@ export const EditModal: FC<Props> = ({ ref, task, refetchTasks, setIsShow }) => 
 
 	const onSubmit: SubmitHandler<ITaskForm> = async ({ dueDate, icon, ...data }) => {
 		const toast = await importToast()
+		console.log(dueDate, task.dueDate)
 		toast.promise(mutateAsync({ ...data, dueDate: new Date(dueDate), icon: icon?.value }), {
 			loading: 'Loading...',
 			success: data => {

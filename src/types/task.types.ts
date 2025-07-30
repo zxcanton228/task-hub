@@ -1,6 +1,7 @@
 import { Calendar, List, Plane } from 'lucide-react'
 import type { IIcon } from 'src/app/(private)/dashboard/tasks/edit-task/PickIcon'
 
+import type { TChartValue } from './chart.types'
 import type { EnumActivitySort, EnumDueDateSort } from './enums'
 import type { IPaginationParams } from './types'
 
@@ -38,5 +39,6 @@ export interface IGetAllTasks {
 export interface IGetAllTasksDto extends IPaginationParams {
 	sort?: EnumActivitySort
 	searchTerm?: string
+	chartType?: TChartValue
 	dueDate?: EnumDueDateSort
 }

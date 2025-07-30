@@ -1,6 +1,6 @@
 import { type Dispatch, type SetStateAction, useCallback, useEffect, useRef, useState } from 'react'
 
-export type TUseOutsideOut = {
+type TUseOutsideOut = {
 	setIsShow: Dispatch<SetStateAction<boolean>>
 	isShow: boolean
 	ref: any

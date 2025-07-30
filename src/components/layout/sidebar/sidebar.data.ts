@@ -2,12 +2,13 @@ import {
 	AlignEndHorizontal,
 	CalendarDays,
 	LayoutPanelLeft,
+	type LucideIcon,
 	MessageCircle,
 	Notebook,
 	Settings,
-	UsersRound,
-	type LucideIcon
+	UsersRound
 } from 'lucide-react'
+
 import { DASHBOARD_PAGES } from 'src/config/dashboard-pages-config'
 
 type TLink = {
@@ -25,32 +26,32 @@ export const MAIN_LINKS: TLink[] = [
 		isHome: true
 	},
 	{
-		href: DASHBOARD_PAGES.MESSAGES,
+		href: DASHBOARD_PAGES.DASHBOARD,
 		label: 'Messages',
 		icon: MessageCircle
 	},
 	{
-		href: DASHBOARD_PAGES.INSIGHT,
+		href: DASHBOARD_PAGES.DASHBOARD,
 		label: 'Insight',
 		icon: AlignEndHorizontal
 	},
 	{
-		href: DASHBOARD_PAGES.TEAM,
+		href: DASHBOARD_PAGES.DASHBOARD,
 		label: 'Team',
 		icon: UsersRound
 	},
 	{
-		href: DASHBOARD_PAGES.SCHEDULE,
+		href: DASHBOARD_PAGES.DASHBOARD,
 		label: 'Schedule',
 		icon: CalendarDays
 	},
 	{
-		href: DASHBOARD_PAGES.REPORT,
+		href: DASHBOARD_PAGES.DASHBOARD,
 		label: 'Report',
 		icon: Notebook
 	},
 	{
-		href: DASHBOARD_PAGES.SETTINGS,
+		href: DASHBOARD_PAGES.DASHBOARD,
 		label: 'Settings',
 		icon: Settings
 	}

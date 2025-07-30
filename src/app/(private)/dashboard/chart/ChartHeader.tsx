@@ -1,25 +1,29 @@
 import cn from 'clsx'
 import { ChevronDown, ChevronUp } from 'lucide-react'
-import { type Dispatch, type FC, type SetStateAction } from 'react'
+import { type FC } from 'react'
 
 import { useOutside } from 'src/hooks/useOutside'
 
-import type { ITimeRange } from 'src/types/chart.types'
+import type { ITimeRange, TChartValue } from 'src/types/chart.types'
 
 import { TIME_RANGES_DATA } from '../data/dashboard.data'
 import { Heading } from 'ui/Heading'
 
 type Props = {
-	state: [ITimeRange, Dispatch<SetStateAction<ITimeRange>>]
+	setChartType: (chartType: TChartValue) => void
+	selectedRange: TChartValue
 }
 
-export const ChartHeader: FC<Props> = ({ state: [selectedRange, setSelectedRange] }) => {
+export const ChartHeader: FC<Props> = ({ selectedRange, setChartType }) => {
 	const { isShow, ref, setIsShow } = useOutside(false)
 
 	const handleChange = (range: ITimeRange) => {
-		setSelectedRange(range)
+		setChartType(range.value)
 		setIsShow(false)
 	}
+
+	const Icon = isShow ? ChevronUp : ChevronDown
+
 	return (
 		<div className='w-full flex justify-between h-10'>
 			<Heading>Project statistic</Heading>
@@ -29,17 +33,17 @@ export const ChartHeader: FC<Props> = ({ state: [selectedRange, setSelectedRange
 					className='px-4 flex items-center gap-1 py-1 border border-grey rounded-full'
 					onClick={() => setIsShow(prev => !prev)}
 				>
-					{selectedRange.label}
-					{isShow ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+					{selectedRange.charAt(0).toUpperCase() + String(selectedRange).slice(1)}
+					<Icon size={16} />
 				</button>
 				{isShow && (
 					<div
-						ref={ref}
 						className='absolute border border-gray-300 top-[calc(100%+0.5rem)] right-0 w-full bg-foreground rounded-xl shadow-xl z-100'
 						aria-hidden={!isShow}
+						ref={ref}
 					>
 						{TIME_RANGES_DATA.map((range, i) => {
-							const isActive = selectedRange.value === range.value
+							const isActive = selectedRange === range.value
 							return (
 								<button
 									className={cn(`w-full text-left p-2`, {

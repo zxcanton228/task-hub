@@ -1,30 +1,34 @@
 'use client'
 
-import { type FC, memo, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { type FC, memo } from 'react'
+import statisticsService from 'src/services/statistics.service'
 
-import type { ITimeRange } from 'src/types/chart.types'
-
-import { MONTHLY_DATA, TIME_RANGES_DATA, YEARLY_DATA } from '../data/dashboard.data'
+import type { IChartDataPoint } from 'src/types/chart.types'
 
 import { Chart } from './Chart'
 import { ChartHeader } from './ChartHeader'
+import { useChangeChartType } from './useChangeChartType'
 
-type Props = {}
+type Props = { initialChartData: IChartDataPoint[] }
 
-// RERENDER постоянно появляется без memo
-export const ProjectChart: FC<Props> = memo(() => {
-	const state = useState<ITimeRange>(TIME_RANGES_DATA[1])
+export const ProjectChart: FC<Props> = memo(({ initialChartData }) => {
+	const { queryParams, isFilterUpdated, updateQueryParams } = useChangeChartType()
 
-	const chartData = state[0].value === 'yearly' ? YEARLY_DATA : MONTHLY_DATA
-
-	console.log('RERENDEr')
+	const { data } = useQuery({
+		queryFn: () => statisticsService.getChart(queryParams.chartType),
+		queryKey: ['get chart data', queryParams],
+		initialData: initialChartData,
+		enabled: isFilterUpdated
+	})
 
 	return (
 		<div className='bg-foreground w-full  p-4 rounded-xl'>
-			<ChartHeader state={state} />
-			<div className='flex items-center mt-10 h-[450px]'>
-				<Chart data={chartData()} />
-			</div>
+			<ChartHeader
+				selectedRange={queryParams.chartType || 'yearly'}
+				setChartType={val => updateQueryParams(val)}
+			/>
+			<div className='flex items-center mt-10 h-[450px]'>{data && <Chart data={data} />}</div>
 		</div>
 	)
 })
